@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <style>
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+    body {
+      background: #E0E0E0;
+      width: 100vw;
+}
+
+#captcha {
+  margin-bottom: 1em;
+
+  margin-left: 170px;
+  font-size: 30px;
+  font-weight: 560;
+  color: green;
+  padding: 10px;
+  background-color:whitesmoke;
+  background-image: url("https://w7.pngwing.com/pngs/521/266/png-transparent-blue-and-gray-dot-black-and-white-textile-pattern-science-and-technology-shading-texture-white-monochrome-thumbnail.png");
+  letter-spacing: 3px;
+}
+.main {
+  position:absolute;
+  top: 10%;
+  left: 34%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+background:white;
+  font-family: Arial, Helvetica, sans-serif;
+height: 420px;
+  width: 480px;
+align-items: center;
+}
+.main p{
+  padding: 10px 18px;
+  font-size: 17px;
+}
+#submit {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+#textBox {
+  height: 25px;
+}
+.redText {
+  color: #a03146;
+  margin-left: 150px;
+  font-weight: bold;
+}
+.greenText {
+  color: #1a3815;
+  font-weight: bold;
+}
+.head{
+  background: #2a5744;
+ margin: 15px 15px;
+ padding: 9px;
+/* padding-top: 20px; */
+
+  
+}
+.captc-txt p{
+  margin-left: 0px;
+  font-size: 16px;
+  font-weight: 600;
+  /* margin-top: 200px; */
+}
+.captc-txt{
+  margin-top: -40px;
+}
+.captc-txt p span{
+  color: red;
+}
+#refresh{
+  margin-left: 170px;
+  height: 24px;
+  width: 24px;
+  border: 1px solid gainsboro;
+}
+#textBox{
+  margin-left: 170px;
+  margin-top: 5px;
+  padding: 17px 1px;
+  border: 1px solid #d1d1d1;
+}
+#submit{
+  color: #fff;
+    border: none;
+    margin-top: 14px;
+    background: #c05433;
+    font-size: 16px;
+    margin-left: 170px;
+    padding: 10px 15px;
+    display: inline-block;
+    font-weight: bold;
+}
+ </style>
+</head>
+  <body>
+    <div class="main">
+  <div id="captchaBackground">
+      <div class="head">
+        <img src="https://www.joinindianarmy.nic.in/writereaddata/Portal/Images/logo.png" alt="">
+      </div>
+      <p>Welcome to Join Indian Army website.Please write text as shown in following image to enter into the website.</p>
+    
+    <div class="con-flex">
+      <span id="captcha"></span>
+      <div class="captc-txt"><p>Captcha <span>*</span></p></div>
+      <button id="refresh" type="submit"><img src="https://joinindianarmy.nic.in/Images/verification-code-refresh.gif" alt=""></button>
+  <br>
+      <input id="textBox" type="text" name="text">
+      <div id="buttons">
+        <!-- <input id="submit" type="submit"> -->
+        <button id="submit" type="submit">Enter Website</button>
+          </div> 
+      <span id="output"></span>
+    </div>
+  </div>
+
+<script>
+    let captchaText = document.querySelector('#captcha');
+let userText = document.querySelector('#textBox');
+let submitButton = document.querySelector('#submit');
+let output = document.querySelector('#output');
+let refreshButton = document.querySelector('#refresh');
+
+let alphaNums = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+let emptyArr = [];
+for(let i = 1; i <= 7; i++) {
+	emptyArr.push(alphaNums[Math.floor(Math.random() * alphaNums.length)]);
+}
+captchaText.innerHTML = emptyArr.join('');
+
+userText.addEventListener('keyup', function(e) {
+	if(e.keyCode === 13) {
+		if(userText.value === captchaText.innerHTML) {
+			output.classList.add("greenText");
+            window.open("indianarmy.html");
+		} else {
+			output.classList.add("redText");
+			output.innerHTML = "Incorrect, please try again";
+		}
+	}
+});
+
+submitButton.addEventListener('click',  function() {
+	if(userText.value === captchaText.innerHTML) {
+		output.classList.add("greenText");
+        window.open("indianarmy.html");
+	} else {
+		output.classList.add("redText");
+		output.innerHTML = "Incorrect, please try again";
+	}
+});
+
+refreshButton.addEventListener('click', function () {
+	userText.value = "";
+	let refreshArr = [];
+	for(let j = 1; j <= 7; j++) {
+		refreshArr.push(alphaNums[Math.floor(Math.random() * alphaNums.length)]);
+	}
+	captchaText.innerHTML = refreshArr.join('');
+	output.innerHTML = "";
+});
+
+submitButton.addEventListener('keyup', function(e) {
+	if(e.keyCode === 13) {
+	if(userText.value === captchaText.innerHTML) {
+        window.open("indianarmy.html");
+		output.classList.add("greenText");
+		
+	} else {
+		output.classList.add("redText");
+		output.innerHTML = "Incorrect, please try again";
+	}
+	}
+});
+
+</script>
+  </body>
+</html>
